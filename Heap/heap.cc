@@ -8,11 +8,11 @@ class Heap {
 		Heap();
 		void insert(int);
 		int popMax();
-    void printHeap();
+		void printHeap();
 
 	private:
 		vector<int> heap;
-    int length;
+		int length;
 		void swap(int, int);
 };
 
@@ -24,7 +24,7 @@ Heap::Heap() {
 // returns an index's parent index. Parent's index must exist.
 // ie. doesn't make sense for index 0.
 int getParentIndex(int index) {
-  return floor((index-1)/2);
+	return floor((index-1)/2);
 }
 
 int getLeftChildIndex(int index) {
@@ -39,7 +39,7 @@ int getRightChildIndex(int index) {
 // swaps values at these two indexes in the heap
 void Heap::swap(int a, int b) {
 	int tmp = heap[a];
-  heap[a] = heap[b];
+	heap[a] = heap[b];
 	heap[b] = tmp;
 	return;
 }
@@ -48,7 +48,7 @@ void Heap::swap(int a, int b) {
 // insert element into heap
 void Heap::insert(int element) {
 	// add an empty element to the end of the vector
-  length++;
+	length++;
 	heap.resize(length);
 
 	int index = length - 1;
@@ -60,7 +60,7 @@ void Heap::insert(int element) {
 		parentIndex = getParentIndex(index);
 
 		// if we need to bubble up, we swap the element at index with the element at parent
-    if (heap[index] > heap[parentIndex]) {
+		if (heap[index] > heap[parentIndex]) {
 			swap(index, parentIndex);
 			index = parentIndex;
 		} else {
@@ -88,7 +88,7 @@ int Heap::popMax() {
 	// our heap is now 1 element shorter
 	length--;
 	
-  int index = 0;
+	int index = 0;
 
 	while (true) {
 		int leftChild = getLeftChildIndex(index);
@@ -100,7 +100,7 @@ int Heap::popMax() {
 		if (isLeftOutOfBounds) {
 			// if left is out of bounds, right is necessarily out of bounds. We found our home.
 			break;
-    } else if (isRightOutOfBounds) {
+		} else if (isRightOutOfBounds) {
 			// check if we need to swap leftChild and index
 			if (heap[index] < heap[leftChild]) {
 				swap(index, leftChild);
@@ -110,7 +110,7 @@ int Heap::popMax() {
 
 			// if we don't need to swap, we found our home
 			break;
-    } else {
+		} else {
 			// swap with the larger of the two, if necessary
 			if (heap[leftChild] > heap[rightChild]) {
 				if (heap[leftChild] > heap[index]) {
@@ -160,13 +160,13 @@ int main() {
 	heap->printHeap();
 
 	cout << "POP MAX: " << heap->popMax() << endl;
-  heap->printHeap();
+	heap->printHeap();
 
 	cout << "POP MAX: " << heap->popMax() << endl;
-  heap->printHeap();
+	heap->printHeap();
 
 	cout << "POP MAX: " << heap->popMax() << endl;
-  heap->printHeap();
+	heap->printHeap();
 	
 	return 0;
 }
