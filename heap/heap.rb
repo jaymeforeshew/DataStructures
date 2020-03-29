@@ -36,10 +36,9 @@ class Heap
     heapify(@last_index)
   end
 
-  # Removes and returns the top element of the Heap
-  # Chooses the smaller of the two children to make the new top.
-  # Replaces chosen child's index with the last index of the heap and
-  # bubbles down from there.
+  # Removes and returns the top element of the Heap.
+  # Replaces the top element with the element in the last_index of the heap.
+  # Bubbles down until it restores the min-heap property.
   def pop_min()
     return nil if @last_index < 0
 
@@ -54,6 +53,7 @@ class Heap
     right_child_index = right_child(curr_index)
   
     while left_child_index <= @last_index || right_child_index <= @last_index do
+      # if curr node < both children, we're done
       return min if @container[curr_index] <= [@container[left_child_index], @container[right_child_index]].min
 
       tmp = @container[curr_index]
@@ -75,8 +75,8 @@ class Heap
       right_child_index = right_child(curr_index)
     end
 
+    # consider left child swap if left child exists
     if left_child_index <= @last_index
-      # consider left child
       if @container[curr_index] <= @container[left_child_index]
         tmp = @contianer[curr_index]
         @container[curr_index] = @container[left_child_index]
